@@ -1,0 +1,75 @@
+#!/bin/bash
+
+#######################################################################
+#																	 
+#		  Solus OS system setup						                        
+#																	  
+#######################################################################
+
+#exemple organisation fichier
+#And to Set up Switch to a Directory into System:
+#sudo mv /tmp/trello /opt/trello
+#
+#Make a Symlink to Easy Launching from Shell:
+#sudo ln -s /opt/trello/Trello /usr/local/bin/Trello
+
+
+
+
+
+# Go into a temp work directory
+mkdir ~/tmp-installer
+cd ~/tmp-installer
+
+# Update the system
+sudo eopkg upgrade
+
+# Development
+sudo eopkg install vscode
+sudo eopkg install git
+
+# Thrid party applications
+
+# Gitkraken
+sudo eopkg bi --ignore-safety https://raw.githubusercontent.com/solus-project/3rd-party/master/programming/gitkraken/pspec.xml
+sudo eopkg it gitkraken*.eopkg
+
+# Spotify
+sudo eopkg bi --ignore-safety https://raw.githubusercontent.com/solus-project/3rd-party/master/multimedia/music/spotify/pspec.xml
+sudo eopkg it spotify*.eopkg
+
+# Google Chrome
+sudo eopkg bi --ignore-safety https://raw.githubusercontent.com/solus-project/3rd-party/master/network/web/browser/google-chrome-stable/pspec.xml
+sudo eopkg it google-chrome*.eopkg
+
+# Skype
+sudo eopkg bi --ignore-safety https://raw.githubusercontent.com/solus-project/3rd-party/master/network/im/skype/pspec.xml
+sudo eopkg it skype*.eopkg
+
+
+# Eclipse
+wget https://www.eclipse.org/downloads/download.php?file=/oomph/epp/oxygen/R/eclipse-inst-linux64.tar.gz
+tar -xzf eclipse-inst-linux64.tar.gz
+cd eclipse-installer
+./eclipse-inst
+
+#cd ~/Downloads
+#tar xf jdk-8u*-linux-x64.tar.gz
+#sudo mkdir -p /opt
+#sudo rm -rf /opt/jdk1.8.0_*
+#sudo mv jdk1.8.0_* /opt/
+#sudo ln -svf /opt/jdk1.8.0_*/bin/java /usr/bin/java
+
+# install Scala in eclipse 
+#
+# dans IDE eclipse, Help->Add->
+# dans location copier ce lien
+#  http://download.scala-ide.org/sdk/lithium/e47/scala212/stable/site
+# renomer Name
+# cliquer sur scala Ide 
+# suivre
+# restart
+# explication
+# https://www.youtube.com/watch?time_continue=79&v=dGI04efb6hg&feature=emb_logo
+
+

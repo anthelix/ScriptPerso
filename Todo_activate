@@ -1,0 +1,37 @@
+#pour demarrer spyder, etre dans l'environnememt my_env
+source activate my_env
+conda update --all
+spyder
+
+source activate deeplearningaz
+
+#pour etre sure d'avoir le shell a jour
+source ~/anaconda3/etc/profile.d/conda.sh
+conda activate my_env
+
+source deactivate
+source ~/.zshrc
+
+https://www.udemy.com/le-deep-learning-de-a-a-z/learn/lecture/13413004#overview
+
+https://gitlab.charlesbordet.com/charles/deeplearning/blob/e9437fd7f7fdbc7768aaf5ce7ceeb8359e8909e7/README.md
+
+Sur MacOS
+conda create --name deeplearningaz python=3.6 anaconda
+conda activate deeplearningaz
+conda install theano
+conda install tensorflow
+conda install keras
+conda update --all
+
+
+Ur ubuntu
+conda create --name deeplearningaz python=3.6 anaconda
+conda activate deeplearningaz
+conda install theano
+conda install tensorflow
+conda install keras
+conda update --all
+
+Si spider est lent: 
+conda install ipython=6 ipykernel=4
