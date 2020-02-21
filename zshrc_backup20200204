@@ -1,13 +1,18 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
+# export SPARK_HOME=/opt/spark
+# export PATH=$PATH:$SPARK_HOME/bin:$SPARK_HOME/sbin
+# export PATH="$PATH:/home/anthelix/anaconda3/bin"
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/schatagn/.oh-my-zsh"
+export ZSH="/home/anthelix/.oh-my-zsh"
 
 
-# script perso
+
+# SCRIPT PERSO
 # pour affichier master si dossier git
-paste <(CLICOLOR_FORCE=true ls -ld *) <(for i in *; do if [ -d "$i"/.git ] ; then echo "($(git --git-dir="$i"/.git symbolic-ref --short HEAD))"; else echo; fi; done)
+# paste <(CLICOLOR_FORCE=true ls -ld *) <(for i in *; do if [ -d "$i"/.git ] ; then echo "($(git --git-dir="$i"/.git symbolic-ref --short HEAD))"; else echo; fi; done)
+
 # m'obliger a utiliser les alias
 function check-alias-and-accept {
   if [ $BUFFER ]; then
@@ -36,7 +41,8 @@ zle -N check-alias-and-accept
 bindkey '^J' check-alias-and-accept
 bindkey '^M' check-alias-and-accept
 
-#pour ne pas oublier un alias explicite, affiche l'entree juste apres l'alias
+
+# pour ne pas oublier un alias explicite, affiche l'entree juste apres l'alias
 preexec_functions=()
 
 function expand_aliases {
@@ -50,38 +56,50 @@ function expand_aliases {
 
 preexec_functions+=expand_aliases
 
-#  script demarrage spyder ou jupyter
-alias start_xcode="sh ~/Documents/script/.start_xcode.sh"
-alias start_jupyter="sh ~/Documents/script/start_jupyter.sh"
-alias start_python="sh ~/Documents/script/start_python.sh"
-# Path to miniconda3 installation
-export PATH="/Users/schatagn/goinfre/miniconda3/bin:$PATH"
 
-# alias de reseau pour init
-alias listports="networksetup -listallhardwareports" 
-
+# ALIAS PERSO
 # pour resoudre pb de mise a our du sevice Cron
 # Locales
 export LANGUAGE=fr_FR.UTF-8
 export LANG=fr_FR.UTF-8
 export LC_ALL=fr_FR.UTF-8
- 
-                 
-# perso"
+
+# perso
+alias 1='cd -'
+alias 2='cd -2'
+alias 3='cd -3'
+alias 4='cd -4'
+alias 5='cd -5'
+alias 6='cd -6'
+alias 7='cd -7'
 
 alias delete.ds="find . -name '.DS_Store' -type f -print -delete"
 alias delete.g="find . -name '.git' -type f -print -delete"
+
+alias la="ls -G -lAFh"
+alias ll="ls -l"
+alias lz="ls && sz"
+
 alias sz="source ~/.zshrc"
 alias te="tree -CA"
 alias te2="tree -CAL 2"
-alias lz="ls && sz"
+
+alias theme="echo $RANDOM_THEME"
+
+# alias GIT
+alias gacp="gaa && gcam 'update' && gp"
+alias gl='git pull'
+
+
+
+
+
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME=random
-
+# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+ZSH_THEME="random"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -99,8 +117,14 @@ ZSH_THEME=random
 # Uncomment the following line to disable bi-weekly auto-update checks.
 # DISABLE_AUTO_UPDATE="true"
 
+# Uncomment the following line to automatically update without prompting.
+# DISABLE_UPDATE_PROMPT="true"
+
 # Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
+export UPDATE_ZSH_DAYS=5
+
+# Uncomment the following line if pasting URLs and other text is messed up.
+# DISABLE_MAGIC_FUNCTIONS=true
 
 # Uncomment the following line to disable colors in ls.
 # DISABLE_LS_COLORS="true"
@@ -109,7 +133,7 @@ ZSH_THEME=random
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
-ENABLE_CORRECTION="true"
+# ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 COMPLETION_WAITING_DOTS="true"
@@ -135,11 +159,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(brew common-aliases gitfast nvm git battery)
-
-
-
-
+plugins=(git common-aliases nvm battery gitfast)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -168,11 +188,3 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-
-
-#export PATH=$HOME/.brew/bin:$PATH
-#export PATH=/Users/schatagn/.brew/bin:/Users/schatagn/.brew/bin:/Users/schatagn/.brew/bin:/sgoinfre/goinfre/Perso/schatagn/miniconda3/bin:/sgoinfre/goinfre/Perso/schatagn/miniconda3/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/usr/local/munki
-export PATH=$HOME/.brew/bin:$PATH
-export PATH=/Users/schatagn/.brew/bin:/Users/schatagn/.brew/bin:/Users/schatagn/.brew/bin:/Users/schatagn/goinfre/miniconda3/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/usr/local/munki
-export PATH=$HOME/.brew/bin:$PATH
-export PATH=/Users/schatagn/.brew/bin:/Users/schatagn/.brew/bin:/Users/schatagn/.brew/bin:/Users/schatagn/.brew/bin:/Users/schatagn/.brew/bin:/Users/schatagn/.brew/bin:/Users/schatagn/goinfre/miniconda3/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/usr/local/munki

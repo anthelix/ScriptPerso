@@ -13,9 +13,8 @@
 #Make a Symlink to Easy Launching from Shell:
 #sudo ln -s /opt/trello/Trello /usr/local/bin/Trello
 
-
-
-
+#Changer de shell par défaut
+chsh -s /bin/zsh
 
 # Go into a temp work directory
 mkdir ~/tmp-installer
@@ -23,16 +22,149 @@ cd ~/tmp-installer
 
 # Update the system
 sudo eopkg upgrade
+sudo eopkg up
+
+# reconstruire la base de donnees si erro avec solus
+sudo eopkg rebuild-db -y
+
+#Getting back to the STABLE REPO
+sudo eopkg remove-repo SolusUnstable
+sudo eopkg add-repo Solus https://packages.solus-project.com/shannon/eopkg-index.xml.xz
+sudo eopkg enable-repo Solus
+sudo eopkg upgrade
 
 # Development
 sudo eopkg install vscode
+sudo eopkg install zsh
 sudo eopkg install git
+sudo eopkg install pip
+sudo eopkg install emacs
+sudo eopkg install -c system.devel
+
+
+# Parametrage de GIT
+		git config --global user.name "Your Name"
+		git config --global user.email "you@your-domain.com"
+		git config --global color.ui auto
+
+# parametrage Solus
+export EDITOR="emacs"
+sudo eopkg install linux-current-headers
+# police windows
+sudo eopkg bi --ignore-safety https://raw.githubusercontent.com/solus-project/3rd-party/master/desktop/font/mscorefonts/pspec.xml
+sudo eopkg it mscorefonts*.eopkg
+
+
+# parametrage de zsh
+sudo chsh -s $(which zsh) # redemarrer
+sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+# replacer .zshrc par le dernier zshrcbackup
+# Tools
+sudo eopkg install diffutils 
+
+# Going back in time
+sudo eopkg history
+sudo eopkg history -t #(+number)
+
+# sauvegarde
+sudo eopkg install deja-dup
+sudo eopkg upgrade deja-dup
 
 # Thrid party applications
+
+# Anaconda
+# script dans /programmperso
+sh Anaconda3-2019.10-Linux-x86_64.sh 
+conda config --set auto_activate_base false
+conda install -c anaconda anaconda-navigator
+conda update -n base -c defaults conda
+eval "$(/home/anthelix/anaconda3/bin/conda shell.zsh hook)"
+# %magic commande
+conda init
+conda install numpy
+conda install pandas
+pip install --user ipython-sql
+pip install --user cython
+pip install --user rpy2
+
+# creer un environemet postgres et l'initialiser
+  543  conda create --name postgresPy
+  544  conda update -n base -c defaults conda
+  545  conda create --name postgresPy
+  546  conda create --name postgres
+  547  conda activate postgres
+  548  conda install -y -c conda-forge postgresql
+  549  psql
+  550  psql -d template1
+
 
 # Gitkraken
 sudo eopkg bi --ignore-safety https://raw.githubusercontent.com/solus-project/3rd-party/master/programming/gitkraken/pspec.xml
 sudo eopkg it gitkraken*.eopkg
+
+# Docker
+# installer 
+# wget https://get.docker.com/builds/Linux/x86_64/docker-latest.tgz
+# tar -xvzf docker-latest.tgz
+# sudo mv docker/* /usr/bin/
+# sudo docker daemon &
+# ou
+sudo eopkg install -y docker
+sudo eopkg docker-compose
+# to docker since sudo
+sudo groupadd docker
+sudo usermod -aG docker $USER
+# then
+sudo systemctl start docker.service
+sudo systemctl enable docker.service
+# then log and de-log
+# To check
+sudo docker run hello-world
+#To try something more ambitious, you can run an Ubuntu container with:
+# $ docker run -it ubuntu bash
+# run Tiny
+sudo docker run --rm -it --init alpine echo "success"
+# or install
+curl -L -o docker-init https://github.com/krallin/tini/releases/download/v0.18.0/tini-static \
+&& chmod +x docker-init \
+&& sudo mv docker-init /usr/bin/docker-init
+docker run --rm -it --init alpine echo "success"
+# test docker run
+docker run hello-world
+# supprimer Docker
+eopkg remove --purge docker
+# supprimer les conteneurs et les images stockés vous pouvez procéder comme suit : 
+rm -rf /var/lib/docker
+# supprimer les certificats et fichiers de configurations liées à Docker :
+rm -rf /etc/docker
+rm /etc/systemd/system/docker.service
+rm /etc/init/d/docker
+apt-get autoremove && apt-get autoclean
+
+# postgresql
+#  Installing postgresql
+sudo eopkg install postgresql
+sudo eopkg install postgresql-devel
+sudo eopkg install postgresql-contrib
+sudo eopkg install psycopg2
+
+sudo systemctl enable postgresql
+sudo systemctl start postgresql
+sudo createuser -U postgres -s $USER
+createuser student
+
+pip freeze | grep psycopg2 #psycopg2==2.7.4
+# environment location: /home/anthelix/anaconda3/envs/psyco
+conda create --name psyco python=3.6 anaconda
+conda activate psyco
+conda install -c anaconda psycopg2=2.7.4
+conda update -n base -c defaults conda
+conda deactivate
+
+
+# ______________________________________________________________________#
+
+
 
 # Spotify
 sudo eopkg bi --ignore-safety https://raw.githubusercontent.com/solus-project/3rd-party/master/multimedia/music/spotify/pspec.xml
@@ -42,23 +174,34 @@ sudo eopkg it spotify*.eopkg
 sudo eopkg bi --ignore-safety https://raw.githubusercontent.com/solus-project/3rd-party/master/network/web/browser/google-chrome-stable/pspec.xml
 sudo eopkg it google-chrome*.eopkg
 
+# Anaconda ancienne methode
+sh Anaconda3-2019.10-Linux-x86_64.sh
+## dans fichier .bahrc remplacer
+## export PATH="/home/<vous>/<dossier_Anaconda>/bin:$PATH"
+## par
+## export PATH="$PATH:/home/<vous>/<dossier_Anaconda>/bin"
+## conda config --set auto_activate_base false
+
+
 # Skype
 sudo eopkg bi --ignore-safety https://raw.githubusercontent.com/solus-project/3rd-party/master/network/im/skype/pspec.xml
 sudo eopkg it skype*.eopkg
 
 
+					     
 # Eclipse
 wget https://www.eclipse.org/downloads/download.php?file=/oomph/epp/oxygen/R/eclipse-inst-linux64.tar.gz
 tar -xzf eclipse-inst-linux64.tar.gz
 cd eclipse-installer
 ./eclipse-inst
 
-#cd ~/Downloads
-#tar xf jdk-8u*-linux-x64.tar.gz
+# Java 
+cd ~/Telechargement
+tar xf openjdk-13.0.1_linux-x64_bin.tar.gz
+
 #sudo mkdir -p /opt
 #sudo rm -rf /opt/jdk1.8.0_*
 #sudo mv jdk1.8.0_* /opt/
-#sudo ln -svf /opt/jdk1.8.0_*/bin/java /usr/bin/java
 
 # install Scala in eclipse 
 #
@@ -73,3 +216,102 @@ cd eclipse-installer
 # https://www.youtube.com/watch?time_continue=79&v=dGI04efb6hg&feature=emb_logo
 
 
+# creer un Lanceur
+## telecharger un logo .svg d'anaconda
+mv anaconda_icon.svg /home/anthelix/Anaconda3
+cd /home/anthelix/.local/share/applications 
+emacs anaconda.desktop
+# ecrire:
+[Desktop Entry]
+ Comment=Anaconda Navigator
+ Terminal=false
+ Name=Anaconda
+ Exec=bash -c "export PATH="$PATH:/home/<vous>/<dossier_Anaconda> /bin" && anaconda-navigator"
+ Type=Application
+ Icon=/home/<vous>/<dossier_Anaconda> /anaconda-icon.svg
+
+
+
+
+# Trelllo
+Download latest unofficial trello desktop app
+https://github.com/danielchatfield/trello-desktop/releases/latest
+#unzip
+#create /opt
+sudo mkdir /opt
+#Set the SuperUser as Owner
+sudo chown -R root:root ./ Trello-linux-0.1.9
+#move it to /opt/trello
+sudo mv Trello-linux-0.1.9 /opt/trello
+Finally, Make a Symlink to Easy Launching from Shell:
+sudo ln -s /opt/trello/Trello /usr/local/bin/Trello
+
+
+Add it to Quick Access Desktop app
+
+sudo echo -e '[Desktop Entry]\n Version=1.0\n Name=Trello\n Icon=/opt/Trello/resources/app/static/Icon.png\nExec=/opt/Trello/Trello\n Type=Application\n Categories=Office' | sudo tee /usr/share/applications/Trello.desktop
+
+# cassandra
+# verifier version java
+java -version
+# download
+https://www-us.apache.org/dist/cassandra/3.11.5/apache-cassandra-3.11.5-bin.tar.gz
+cd ~/Telechargement
+chmod 755
+tar -xvzf apache-cassandra-3.11.5.tar.gz
+sudo mv apache-cassandra-3.11.5 /opt
+sudo mv apache-cassandra-3.11.5 cassandra
+sudo mkdir /var/lib/cassandra/
+sudo mkdir /var/lib/cassandra/commitlog
+sudo mkdir /var/lib/cassandra/data
+sudo mkdir /var/log/cassandra/
+sudo chown -R anthelix /var/lib/cassandra/ /var/log/cassandra/
+# modifier le path dans .zshrc
+export CASSANDRA_HOME=/opt/cassandra
+export PATH=$PATH:$CASSANDRA_HOME/bin:$CASSANDRA_HOME/sbin
+# cassandra is running?
+/opt/cassandra/bin/nodetool status
+# pour utiliser cassandra dans jupyter notebook
+sudo create --name cassand python=2.7 anaconda
+condat activate cassand
+conda install -c conda-forge cassandra-driver 
+conda install -c conda-forge/label/cf201901 cassandra-driver 
+conda update -n base -c defaults conda
+# desinstaller cassandra
+sudo rm -R /var/log/cassandra
+sudo rm -R /etc/cassandra
+sudo rm -R /etc/apt/sources.list.d/cassandra.sources.list
+find / -name '*cassandra*'
+sudo eopkg autoremove cassandra
+
+
+
+# systemd
+## https://www.digitalocean.com/community/tutorials/how-to-use-systemctl-to-manage-systemd-services-and-units
+## to initialize the components that must be started after the Linux kernel is booted
+## The init system is also used to manage services and daemons for the server at any point while the system is running. 
+## sudo systemctl start application
+## sudo systemctl stop application
+## sudo systemctl restart application
+## sudo systemctl reload application
+## sudo systemctl enable application # to start services automatically at boot, 
+## sudo systemctl disable application
+## systemctl status application
+
+## systemctl is-active application # currently active? 
+## systemctl is-enabled application
+## systemctl is-failed application
+
+## systemctl list-units
+## systemctl list-units --all # 
+## systemctl list-units --all --state=inactive/load/active/sub
+## systemctl list-units --type=service # only active service units
+## systemctl list-unit-files
+
+## systemctl cat atd.service # display the unit file
+## systemctl list-dependencies sshd.service # display all dependencie de sshd
+## systemctl show sshd.service # show low-level properties
+## sudo systemctl edit nginx.service # open a snippet for the unit nginx
+! ## sudo rm -r /etc/systemd/system/nginx.service.d # to remove a snippet,
+! ## sudo rm /etc/systemd/system/nginx.service # To remove a full modified unit file,
+! ## sudo systemctl daemon-reload

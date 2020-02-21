@@ -35,3 +35,12 @@ conda update --all
 
 Si spider est lent: 
 conda install ipython=6 ipykernel=4
+
+
+postgresql
+# environment location: /home/anthelix/anaconda3/envs/psyco
+conda create --name psyco python=3.6 anaconda
+conda activate psyco
+conda install -c anaconda psycopg2=2.7.4
+conda update -n base -c defaults conda
+conda desactivate
