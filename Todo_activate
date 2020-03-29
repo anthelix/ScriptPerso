@@ -9,6 +9,8 @@ source activate deeplearningaz
 source ~/anaconda3/etc/profile.d/conda.sh
 conda activate my_env
 
+
+
 source deactivate
 source ~/.zshrc
 
