@@ -1,0 +1,136 @@
+#!/bin/sh
+
+# SCRIPT PERSO
+# pour affichier master si dossier git
+# paste <(CLICOLOR_FORCE=true ls -ld *) <(for i in *; do if [ -d "$i"/.git ] ; then echo "($(git --git-dir="$i"/.git symbolic-ref --short HEAD))"; else echo; fi; done)
+
+
+
+
+
+
+# ALIAS PERSO
+# pour resoudre pb de mise a our du sevice Cron
+# Locales
+export LANGUAGE=fr_FR.UTF-8
+export LANG=fr_FR.UTF-8
+export LC_ALL=fr_FR.UTF-8
+
+# solus
+alias update='sudo eopkg ur && sudo eopkg up -y'
+alias install='sudo eopkg install'
+alias upall="echo -e updating$'\n'system... && sudo eopkg up -y && echo \nnpm... && sudo npm update && sudo npm install -g npm && "
+
+# perso
+alias .='cd ..'
+alias ..='cd ../..'
+alias ...='cd ../../..'
+d='dirs -v | head -10'
+alias 1='cd -1'
+alias 2='cd -2'
+alias 3='cd -3'
+alias 4='cd -4'
+alias 5='cd -5'
+alias 6='cd -6'
+alias 7='cd -7'
+
+# environnemet Conda
+alias psyco="conda activate psyco"
+
+# se deplacer
+alias dend='cd /home/anthelix/Documents/projetGit/20200102_udacityNanoEng'
+alias spark='cd /home/anthelix/Documents/projetGit/20200102_udacityNanoEng/4_DataLakesWithSpark'
+alias p1='cd /home/anthelix/Documents/projetGit/udacity_project1'
+alias p2='cd /home/anthelix/Documents/projetGit/udacity_project2'
+alias p3='cd /home/anthelix/Documents/projetGit/udacity_project3'
+alias p4='cd /home/anthelix/Documents/projetGit/udacity_project4'
+alias art='cd /home/anthelix/Documents/dockerWorflow/Art'
+alias dark='cd /home/anthelix/Documents/dockerWorflow/dark'
+alias pag='cd /home/anthelix/Documents/dockerWorflow/pag'
+alias udaspark='/home/anthelix/Documents/dockerWorflow/udaspark'
+
+# lancer progranne
+alias an='anaconda-navigator'
+
+alias c='clear'
+alias delete.ds="find . -name '.DS_Store' -type f -print -delete"
+alias delete.g="find . -name '.git' -type f -print -delete"
+alias dif='diff -y --suppress-common-lines'
+alias dud='du -d 1 -h'
+alias duf='du -sh *' 
+alias fd='find . -type d -name'
+alias ff='find . -type f -name'
+
+alias grep='grep --color'
+alias ggrep='grep -v git'
+alias sgrep='grep -R -n -H -C 5 --exclude-dir={.git,.svn,CVS} '
+
+alias h='history'
+alias hgrep="fc -El 0 | grep"
+alias gh='history|grep' # gh volture
+alias help='man'
+alias p='ps -f'
+alias sortnr='sort -n -r'
+
+alias la="ls -G -lAFh"
+alias left='ls -t -1' # get the files most recently modify
+alias ll="ls -l"
+alias lst="ls -aAgGst"
+alias lz="ls && sz"
+alias l='ls -lFh'     #size,show type,human readable
+alias la='ls -lAFh'   #long list,show almost all,show type,human readable
+alias lr='ls -tRFh'   #sorted by date,recursive,show type,human readable
+alias lt='ls -ltFh'   #long list,sorted by date,show type,human readable
+alias lh='ls --human-readable --size -1 -S --classify'
+alias ll='ls -l'      #long list
+alias ldot='ls -ld .*'
+alias lS='ls -1FSsh'
+alias lart='ls -1Fcart'
+alias lrt='ls -1Fcrt'
+alias lz='ls && sz'
+alias bla='echo "blable bli"'
+
+alias md="mkdir -p"
+
+
+alias sz="source ~/.zshrc"
+alias sz.a="source ~/.zshrc_aliases"
+alias sz.f="source ~.zshrc_functions"
+alias te="tree -CA"
+alias te2="tree -CAL 2"
+alias ter='tree -aR'
+
+alias theme="echo $RANDOM_THEME"
+alias zshrc='${=EDITOR} ~/.zshrc' # Quick access to the ~/.zshrc file
+
+# alias Docker
+alias db='docker-compose build'
+alias dud='docker-compose up -d'
+alias dps='docker ps -a'
+#alias d.stop='docker stop $(docker ps -a -q)'
+#alias d.rm='docker rm $(docker ps -a -q)'
+#alias d.rmi='docker rmi -f $(docker images -qa)'
+#alias d.d ='docker-compose down --volume'
+alias d.v='docker volume prune'
+#alias d.all='d.d && d.stop && d.rm && d.v && d.rmi'
+ 
+
+# alias GIT
+alias gacp="gaa && gcam 'update' && gp"
+alias gl='git pull'
+alias gex='echo "$1" >> .git/info/exclude'
+alias gig='echo "$1" >> .gitignore'
+alias grm='git rm --cached "$1"'
+
+## pass options to free ##
+alias meminfo='free -m -l -t'
+ 
+## get top process eating memory
+alias psmem='ps auxf | sort -nr -k 4'
+alias psmem10='ps auxf | sort -nr -k 4 | head -10'
+ 
+## get top process eating cpu ##
+alias pscpu='ps auxf | sort -nr -k 3'
+alias pscpu10='ps auxf | sort -nr -k 3 | head -10'
+
+

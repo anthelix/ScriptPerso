@@ -1,87 +1,30 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
+# export SPARK_HOME=/opt/spark
+# export PATH=$PATH:$SPARK_HOME/bin:$SPARK_HOME/sbin
+export PATH="$PATH:/home/anthelix/anaconda3/bin"
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/schatagn/.oh-my-zsh"
+export ZSH="/home/anthelix/.oh-my-zsh"
 
+# Alias definitions.
+# You may want to put all your additions into a separate file like
+# ~/.bash_aliases, instead of adding them here directly.
+# See /usr/share/doc/bash-doc/examples in the bash-doc package.
 
-# script perso
-# pour affichier master si dossier git
-paste <(CLICOLOR_FORCE=true ls -ld *) <(for i in *; do if [ -d "$i"/.git ] ; then echo "($(git --git-dir="$i"/.git symbolic-ref --short HEAD))"; else echo; fi; done)
-# m'obliger a utiliser les alias
-function check-alias-and-accept {
-  if [ $BUFFER ]; then
+if [ -f ~/.zshrc_functions ]; then
+    . ~/.zshrc_functions
+fi
 
-    ALIAS=`alias -L | grep -e "=[\'\"]\?${BUFFER}[\'\"]\?$"`
-
-    if [ $ALIAS ]; then
-      echo
-      echo "You have this alias:"
-      echo
-      echo $ALIAS
-      echo
-      echo "Use it!"
-
-      zle kill-whole-line
-      zle reset-prompt
-    else
-      zle accept-line
-    fi
-  else
-    zle accept-line
-  fi
-}
-
-zle -N check-alias-and-accept
-bindkey '^J' check-alias-and-accept
-bindkey '^M' check-alias-and-accept
-
-#pour ne pas oublier un alias explicite, affiche l'entree juste apres l'alias
-preexec_functions=()
-
-function expand_aliases {
-  input_command=$1
-  expanded_command=$2
-  if [ $input_command != $expanded_command ]; then
-    print -nP $PROMPT
-    echo $expanded_command
-  fi
-}
-
-preexec_functions+=expand_aliases
-
-#  script demarrage spyder ou jupyter
-alias start_xcode="sh ~/Documents/script/.start_xcode.sh"
-alias start_jupyter="sh ~/Documents/script/start_jupyter.sh"
-alias start_python="sh ~/Documents/script/start_python.sh"
-# Path to miniconda3 installation
-export PATH="/Users/schatagn/goinfre/miniconda3/bin:$PATH"
-
-# alias de reseau pour init
-alias listports="networksetup -listallhardwareports" 
-
-# pour resoudre pb de mise a our du sevice Cron
-# Locales
-export LANGUAGE=fr_FR.UTF-8
-export LANG=fr_FR.UTF-8
-export LC_ALL=fr_FR.UTF-8
- 
-                 
-# perso"
-
-alias delete.ds="find . -name '.DS_Store' -type f -print -delete"
-alias delete.g="find . -name '.git' -type f -print -delete"
-alias sz="source ~/.zshrc"
-alias te="tree -CA"
-alias te2="tree -CAL 2"
-alias lz="ls && sz"
+if [ -f ~/.zshrc_aliases ]; then
+    . ~/.zshrc_aliases
+fi
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME=random
-
+# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+ZSH_THEME="random"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -99,8 +42,14 @@ ZSH_THEME=random
 # Uncomment the following line to disable bi-weekly auto-update checks.
 # DISABLE_AUTO_UPDATE="true"
 
+# Uncomment the following line to automatically update without prompting.
+# DISABLE_UPDATE_PROMPT="true"
+
 # Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
+export UPDATE_ZSH_DAYS=5
+
+# Uncomment the following line if pasting URLs and other text is messed up.
+# DISABLE_MAGIC_FUNCTIONS=true
 
 # Uncomment the following line to disable colors in ls.
 # DISABLE_LS_COLORS="true"
@@ -109,7 +58,7 @@ ZSH_THEME=random
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
-ENABLE_CORRECTION="true"
+# ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 COMPLETION_WAITING_DOTS="true"
@@ -135,11 +84,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(brew common-aliases gitfast nvm git battery)
-
-
-
-
+plugins=(git common-aliases nvm battery gitfast)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -169,10 +114,18 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/anthelix/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/anthelix/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/anthelix/anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/anthelix/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
 
-#export PATH=$HOME/.brew/bin:$PATH
-#export PATH=/Users/schatagn/.brew/bin:/Users/schatagn/.brew/bin:/Users/schatagn/.brew/bin:/sgoinfre/goinfre/Perso/schatagn/miniconda3/bin:/sgoinfre/goinfre/Perso/schatagn/miniconda3/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/usr/local/munki
-export PATH=$HOME/.brew/bin:$PATH
-export PATH=/Users/schatagn/.brew/bin:/Users/schatagn/.brew/bin:/Users/schatagn/.brew/bin:/Users/schatagn/goinfre/miniconda3/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/usr/local/munki
-export PATH=$HOME/.brew/bin:$PATH
-export PATH=/Users/schatagn/.brew/bin:/Users/schatagn/.brew/bin:/Users/schatagn/.brew/bin:/Users/schatagn/.brew/bin:/Users/schatagn/.brew/bin:/Users/schatagn/.brew/bin:/Users/schatagn/goinfre/miniconda3/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/usr/local/munki
