@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# To save zshrc
+# sh copy_files.sh
+
 # SCRIPT PERSO
 # pour affichier master si dossier git
 # paste <(CLICOLOR_FORCE=true ls -ld *) <(for i in *; do if [ -d "$i"/.git ] ; then echo "($(git --git-dir="$i"/.git symbolic-ref --short HEAD))"; else echo; fi; done)
@@ -62,6 +65,7 @@ alias ggrep='grep -v git'
 alias sgrep='grep -R -n -H -C 5 --exclude-dir={.git,.svn,CVS}'
 alias agrep='grep -ERHi "\balias.*\b|$" ~/.zshrc_aliases | cut -d: -f2,3 | egrep --color "alias|$"'
 
+
 alias h='history'
 alias hgrep="fc -El 0 | grep"
 alias gh='history|grep' # gh volture
@@ -123,8 +127,10 @@ alias g.ai='git add -i'
 alias g.one='git log --oneline'
 alias g.stat='git log --stat'
 alias g.graph="git log --graph --pretty=format:'%C(dim blue)%h%Creset -%C(cyan)%d%Creset %C(normal)%s%Creset %C(dim magenta)(%cr) %C(dim red)<%an>%Creset' --abbrev-commit --date=relative"
-alias g.ssh='git remote set-url origin git@github.com:anthelix/'
-nnn
+
+# add repo to ssh connection
+alias gssh='gssh(){ git remote set-url origin git@github.com:anthelix/"$1".git }; noglob gssh'
+
 ## pass options to free
 alias meminfo='free -m -l -t'
  
