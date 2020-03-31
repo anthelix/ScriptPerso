@@ -4,11 +4,6 @@
 # pour affichier master si dossier git
 # paste <(CLICOLOR_FORCE=true ls -ld *) <(for i in *; do if [ -d "$i"/.git ] ; then echo "($(git --git-dir="$i"/.git symbolic-ref --short HEAD))"; else echo; fi; done)
 
-
-
-
-
-
 # ALIAS PERSO
 # pour resoudre pb de mise a our du sevice Cron
 # Locales
@@ -16,12 +11,12 @@ export LANGUAGE=fr_FR.UTF-8
 export LANG=fr_FR.UTF-8
 export LC_ALL=fr_FR.UTF-8
 
-# solus
+## solus
 alias update='sudo eopkg ur && sudo eopkg up -y'
 alias install='sudo eopkg install'
 alias upall="echo -e updating$'\n'system... && sudo eopkg up -y && echo \nnpm... && sudo npm update && sudo npm install -g npm && "
 
-# perso
+## quickly
 alias .='cd ..'
 alias ..='cd ../..'
 alias ...='cd ../../..'
@@ -34,10 +29,10 @@ alias 5='cd -5'
 alias 6='cd -6'
 alias 7='cd -7'
 
-# environnemet Conda
+## environnemet Conda
 alias psyco="conda activate psyco"
 
-# se deplacer
+## se deplacer
 alias dend='cd /home/anthelix/Documents/projetGit/20200102_udacityNanoEng'
 alias spark='cd /home/anthelix/Documents/projetGit/20200102_udacityNanoEng/4_DataLakesWithSpark'
 alias p1='cd /home/anthelix/Documents/projetGit/udacity_project1'
@@ -49,9 +44,10 @@ alias dark='cd /home/anthelix/Documents/dockerWorflow/dark'
 alias pag='cd /home/anthelix/Documents/dockerWorflow/pag'
 alias udaspark='/home/anthelix/Documents/dockerWorflow/udaspark'
 
-# lancer progranne
+## lancer progranne
 alias an='anaconda-navigator'
-
+ 
+## standard
 alias c='clear'
 alias delete.ds="find . -name '.DS_Store' -type f -print -delete"
 alias delete.g="find . -name '.git' -type f -print -delete"
@@ -61,16 +57,16 @@ alias duf='du -sh *'
 alias fd='find . -type d -name'
 alias ff='find . -type f -name'
 
-alias grep='grep --color'
+alias grep='grep --color=auto'
 alias ggrep='grep -v git'
-alias sgrep='grep -R -n -H -C 5 --exclude-dir={.git,.svn,CVS} '
+alias sgrep='grep -R -n -H -C 5 --exclude-dir={.git,.svn,CVS}'
+alias agrep='grep -ERHi "\balias.*\b|$" ~/.zshrc_aliases | cut -d: -f2,3 | egrep --color "alias|$"'
 
 alias h='history'
 alias hgrep="fc -El 0 | grep"
 alias gh='history|grep' # gh volture
 alias help='man'
-alias p='ps -f'
-alias sortnr='sort -n -r'
+
 
 alias la="ls -G -lAFh"
 alias left='ls -t -1' # get the files most recently modify
@@ -88,11 +84,11 @@ alias lS='ls -1FSsh'
 alias lart='ls -1Fcart'
 alias lrt='ls -1Fcrt'
 alias lz='ls && sz'
-alias bla='echo "blable bli"'
+alias p='ps -f'
 
 alias md="mkdir -p"
 
-
+alias sortnr='sort -n -r'
 alias sz="source ~/.zshrc"
 alias sz.a="source ~/.zshrc_aliases"
 alias sz.f="source ~/.zshrc_functions"
@@ -103,7 +99,7 @@ alias ter='tree -aR'
 alias theme="echo $RANDOM_THEME"
 alias zshrc='${=EDITOR} ~/.zshrc' # Quick access to the ~/.zshrc file
 
-# alias Docker
+## Docker
 alias db='docker-compose build'
 alias dud='docker-compose up -d'
 alias dps='docker ps -a'
@@ -115,23 +111,28 @@ alias d.v='docker volume prune'
 #alias d.all='d.d && d.stop && d.rm && d.v && d.rmi'
  
 
-# alias GIT
+## GIT
 alias gacp="gaa && gcam 'update' && gp"
 alias gl='git pull'
 alias gex='echo "$1" >> .git/info/exclude'
 alias gig='echo "$1" >> .gitignore'
-alias grm='git rm --cached "$1"'
-alias ignore='!([ ! -e .gitignore ] && touch .gitignore) | echo $1 >>.gitignore'
-alias a='ls -la'
-## pass options to free ##
+alias grm='git rm --cached'
+alias g.ignore='([ ! -e .gitignore ] && touch .gitignore) | echo $1 >>.gitignore'
+alias g.log="git log --graph --name-only --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold magenta)%d%C(reset)' --all"
+alias g.ai='git add -i'
+alias g.one='git log --oneline'
+alias g.stat='git log --stat'
+alias g.graph="git log --graph --pretty=format:'%C(dim blue)%h%Creset -%C(cyan)%d%Creset %C(normal)%s%Creset %C(dim magenta)(%cr) %C(dim red)<%an>%Creset' --abbrev-commit --date=relative"
+alias g.ssh='git remote set-url origin git@github.com:anthelix/'
+nnn
+## pass options to free
 alias meminfo='free -m -l -t'
  
 ## get top process eating memory
 alias psmem='ps auxf | sort -nr -k 4'
 alias psmem10='ps auxf | sort -nr -k 4 | head -10'
  
-## get top process eating cpu ##
+## get top process eating cpu
 alias pscpu='ps auxf | sort -nr -k 3'
 alias pscpu10='ps auxf | sort -nr -k 3 | head -10'
-
 
