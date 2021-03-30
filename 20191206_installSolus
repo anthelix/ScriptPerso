@@ -36,6 +36,7 @@ sudo eopkg upgrade
 # Development
 sudo eopkg install vscode
 sudo eopkg install zsh
+sudo eopkg install emacs
 sudo eopkg install git
 sudo eopkg install pip
 sudo eopkg install emacs
