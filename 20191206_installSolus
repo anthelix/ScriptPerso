@@ -57,7 +57,8 @@ sudo eopkg it mscorefonts*.eopkg
 
 
 # parametrage de zsh
-sudo chsh -s $(which zsh) # redemarrer
+sudo chsh -s $(which zsh)
+sudo chsh -s /bin/zsh $(whoami)# redemarrer
 sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
 # replacer .zshrc par le dernier zshrcbackup
 # Tools
