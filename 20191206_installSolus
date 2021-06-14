@@ -203,6 +203,24 @@ cd eclipse-installer
 # Java 
 cd ~/Telechargement
 tar xf openjdk-13.0.1_linux-x64_bin.tar.gz
+\sudo ln -sf /usr/lib64/openjdk-11/bin/java /usr/bin
+10012  \sudo ln -sf /usr/lib64/openjdk-11/bin/javac javac
+10013  \sudo ln -sf /usr/lib64/openjdk-11/bin/java java
+10014  \sudo ln -sf /usr/lib64/openjdk-11/bin/java javadoc
+10015  \sudo ln -sf /usr/lib64/openjdk-11/bin/javah javah
+10016  \sudo ln -sf /usr/lib64/openjdk-11/bin/javap javap
+10017  \sudo ln -sf /usr/lib64/openjdk-11/bin/java-rmi.cgi java-rmi.cgi
+10018  \sudo ln -sf /usr/lib64/openjdk-11/bin/jar jar
+10019  \sudo ln -sf /usr/lib64/openjdk-11/bin/jarsigner jarsigner
+10020  \sudo ln -sf /usr/lib64/openjdk-11/bin/java java
+10021  \sudo ln -sf /usr/lib64/openjdk-11/bin/java /usr/bin
+
+ls -la usr/lib64/openjdk-11
+10026  which java
+10027  java -version
+
+
+
 
 #sudo mkdir -p /opt
 #sudo rm -rf /opt/jdk1.8.0_*
